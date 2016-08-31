@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    $(function() {
+        // evento do botao
+        $("#enviar").click(function() {
+            $(".formulario").fadeOut("slow");// acutando o formulario
+            beforeSend:$(".carregando").fadeIn("slow");// exibindo a div carregando
+            // pegando variaveis
+            var nome = $("#nome").val();
+            var email = $("#email").val();
+            var msn = $("#msn").val();
+            // postando dados
+            $.post("{PATH_CONTROLLER}/salvar", {nome: nome, email: email, msn: msn}, function(pegar_dados) {
+                complete:$(".carregando").fadeOut("slow"); // acutando div carregando
+                $(".retorno").fadeIn("slow").html(pegar_dados); // pegando dados de retorno e exibindo div retorno
+                // evento do baotao voltar
+                $("#voltar").click(function() { 
+                    $(".retorno").fadeOut("slow"); // acutando a div retorno
+                    $(".formulario").fadeIn("slow");// exibindo formulario
+                });
+            });
+        });
+    });
+</script>
